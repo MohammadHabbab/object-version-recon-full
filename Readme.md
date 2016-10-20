@@ -40,7 +40,7 @@ The app will allow users to upload the CSV file and then query the system about 
 
 Had initially did this as the frontend for the object versioning reconstruction app (for more information of the earlier version, see [here](https://github.com/RenchChua/object-version-recon-back)).
 
-After suggestion from Jordan's email, I wondered if I can combine both the frontend and the backend into a complete app. After some exploration, I found a library, [Papa Parse](http://papaparse.com/), that I thought could allow me to accomplish what I wanted to do.
+After reading the suggestion from Jordan's email, I wondered if I can combine both the frontend and the backend into a complete app. After some exploration, I found a library, [Papa Parse](http://papaparse.com/), that I thought could allow me to accomplish what I wanted to do.
 
 After incorporating the Papa Parse library, I am now able to process CSV files and query the properties of each object at particular timestamps. I am also able to process more than just one file. This is an improvement from the earlier limitation that I had faced.
 
@@ -48,7 +48,7 @@ The app is deployed at [https://renchchua.github.io/object-version-recon-front/]
 
 ## Using the app
 
-The frontend repo contains two test CSV files in the public folder. At the deployed frontend, upload either one of the test CSV files. The object types of the uploaded CSV file will then appear as options that you can choose. Once you choose the object type you want to query, the options for timestamps will appear. Choose the timestamp you want to query. The object states of the object and timestamp selected will be returned.
+This repo contains two test CSV files in the public folder. At the deployed frontend, upload either one of the test CSV files. The object types of the uploaded CSV file will then appear as options that you can choose. Once you choose the object type you want to query, the options for timestamps will appear. Choose the timestamp you want to query. The object states of the object and timestamp selected will be returned.
 
 ## Tech Stack
 
