@@ -22,7 +22,7 @@ export default class Layout  extends React.Component {
     formData.append('uploadFile', file);
 
     axios({
-        url:'http://localhost:1337/csv',
+        url:'https://localhost:1337/csv',
         method:'post',
         data: formData,
         processData: false,
