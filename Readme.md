@@ -1,4 +1,4 @@
-# Object Versioning Reconstruction - frontend
+# Object Versioning Reconstruction
 
 ## Introduction
 
