@@ -30,6 +30,10 @@ export default class Layout  extends React.Component {
           let objectTypes = objectTypeArray.filter((v, i, a) => a.indexOf(v) === i)
           objectTypes.unshift(" ")
           this.setState({object_types:objectTypes})
+          this.refs.selectedObject.value = " "
+          this.refs.selectedTimestamp.value = " "
+          this.setState({properties:[]})
+
           alert("Upload Successful!")
         }.bind(this)
       }
@@ -38,6 +42,7 @@ export default class Layout  extends React.Component {
 
   _selectObject(e){
     let chosenObject = e.target.value
+    console.log("The selected object is ", this.refs.selectedObject.value);
     this.setState({chosen_object:chosenObject})
     let csvInfo = this.state.csvInfo
     let timestampsArray = []
@@ -52,6 +57,7 @@ export default class Layout  extends React.Component {
 
   _selectTimestamp(e){
     let csvInfo = this.state.csvInfo
+    console.log("The selected object is ", this.refs.selectedTimestamp.value);
     for (var i = 0; i < csvInfo.length; i++) {
       if (csvInfo[i]["object_type"] === this.state.chosen_object && csvInfo[i]["timestamp"]=== parseInt(e.target.value)) {
         this.setState({properties:csvInfo[i]["object_changes"]})
@@ -77,10 +83,10 @@ export default class Layout  extends React.Component {
           <input id="csvfile" type="file" ref="uploadedFile"/>
           <input type="submit" value="uploadedFile"/>
         </form>
-        <select onChange={this._selectObject.bind(this)}>
+        <select ref="selectedObject" onChange={this._selectObject.bind(this)}>
           {object_type}
         </select>
-        <select onChange={this._selectTimestamp.bind(this)}>
+        <select ref="selectedTimestamp" onChange={this._selectTimestamp.bind(this)}>
           {timestamps}
         </select>
         <div>
