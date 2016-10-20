@@ -15,21 +15,18 @@ export default class Layout  extends React.Component {
 
   _uploadFile(e){
     e.preventDefault()
-    console.log("the target is ", e.target);
-    console.log("the value of the refs is ", this.refs.uploadedFile.files[0]);
     let file = this.refs.uploadedFile.files[0]
     var formData = new FormData();
     formData.append('uploadFile', file);
 
     axios({
-        url:'https://localhost:1337/csv',
+        url:'http://localhost:1337/csv',
         method:'post',
         data: formData,
         processData: false,
         contentType: false,
         crossDomain: true
       }).then(function (response) {
-        console.log(response);
         let csvInfo = response.data
         this.setState({csvInfo:csvInfo})
         let objectTypeArray = []
@@ -43,7 +40,6 @@ export default class Layout  extends React.Component {
   }
 
   _selectObject(e){
-    console.log("the object chosen is ", e.target.value);
     let chosenObject = e.target.value
     this.setState({chosen_object:chosenObject})
     let csvInfo = this.state.csvInfo
@@ -51,7 +47,6 @@ export default class Layout  extends React.Component {
     for (var i = 0; i < csvInfo.length; i++) {
       if (csvInfo[i]["object_type"]===chosenObject) {
         timestampsArray.push(csvInfo[i]["timestamp"])
-        console.log(timestampsArray);
       }
     }
     timestampsArray.unshift(" ")
@@ -60,9 +55,6 @@ export default class Layout  extends React.Component {
 
   _selectTimestamp(e){
     let csvInfo = this.state.csvInfo
-    console.log(e.target.value);
-    console.log("the type of e.target.value is ", typeof e.target.value);
-    console.log("the type of timestamp is ", typeof csvInfo[0]["timestamp"]);
     for (var i = 0; i < csvInfo.length; i++) {
       if (csvInfo[i]["object_type"] === this.state.chosen_object && csvInfo[i]["timestamp"]=== parseInt(e.target.value)) {
         this.setState({properties:csvInfo[i]["object_changes"]})

@@ -19,7 +19,6 @@
     "csvtojson": "^1.0.3",
     "express": "^4.14.0",
     "react": "^0.14.6",
-    "react-bootstrap": "^0.30.5",
     "react-dom": "^0.14.6",
     "webpack": "^1.12.9",
     "webpack-dev-server": "^1.14.1"
