@@ -44,7 +44,7 @@ After suggestion from Jordan's email, I wondered if I can combine both the front
 
 After incorporating the Papa Parse library, I am now able to process CSV files and query the properties of each object at particular timestamps. I am also able to process more than just one file. This is an improvement from the earlier limitation that I had faced.
 
-The app is deployed at [https://renchchua.github.io/object-version-recon-front/](https://renchchua.github.io/object-version-recon-front/).
+The app is deployed at [https://renchchua.github.io/object-version-recon-full/](https://renchchua.github.io/object-version-recon-full/).
 
 ## Using the app
 
