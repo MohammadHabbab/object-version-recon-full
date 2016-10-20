@@ -15,28 +15,24 @@ export default class Layout  extends React.Component {
 
   _uploadFile(e){
     e.preventDefault()
-    let file = this.refs.uploadedFile.files[0]
-    var formData = new FormData();
-    formData.append('uploadFile', file);
+    $('#csvfile').parse({
+      config: {
+        header: true,
+        dynamicTyping: true,
+        complete: function (results) {
+          let csvInfo = results.data
+          this.setState({csvInfo:csvInfo})
+          let objectTypeArray = []
+          for (var i = 0; i < csvInfo.length; i++) {
+            objectTypeArray.push(csvInfo[i]["object_type"])
+          }
 
-    axios({
-        url:'http://localhost:1337/csv',
-        method:'post',
-        data: formData,
-        processData: false,
-        contentType: false,
-        crossDomain: true
-      }).then(function (response) {
-        let csvInfo = response.data
-        this.setState({csvInfo:csvInfo})
-        let objectTypeArray = []
-        for (var i = 0; i < csvInfo.length; i++) {
-          objectTypeArray.push(csvInfo[i]["object_type"])
-        }
-        let objectTypes = objectTypeArray.filter((v, i, a) => a.indexOf(v) === i)
-        objectTypes.unshift(" ")
-        this.setState({object_types:objectTypes})
-      }.bind(this))
+          let objectTypes = objectTypeArray.filter((v, i, a) => a.indexOf(v) === i)
+          objectTypes.unshift(" ")
+          this.setState({object_types:objectTypes})
+        }.bind(this)
+      }
+    })
   }
 
   _selectObject(e){
