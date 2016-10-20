@@ -30,6 +30,7 @@ export default class Layout  extends React.Component {
           let objectTypes = objectTypeArray.filter((v, i, a) => a.indexOf(v) === i)
           objectTypes.unshift(" ")
           this.setState({object_types:objectTypes})
+          alert("Upload Successful!")
         }.bind(this)
       }
     })
