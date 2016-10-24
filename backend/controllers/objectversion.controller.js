@@ -4,10 +4,10 @@ module.exports = {
 
   query: function(req, res, next) {
     console.log("the req.query is ", req.query);
-    let objectType = req.query.objectType
-    let timestamp = parseInt(req.query.timestamp)
-    let timestampArray =[" "]
-    let uniqueTimestampArray
+    var objectType = req.query.objectType
+    var timestamp = parseInt(req.query.timestamp)
+    var timestampArray =[" "]
+    var uniqueTimestampArray
 
     if (req.query.objectType && !req.query.timestamp) {
       objectType = req.query.objectType
@@ -35,8 +35,8 @@ module.exports = {
                       res.status(200).json(objectversions)
                     })
     }else{
-      let objectTypeArray = [" "]
-      let uniqueObjectTypesArray
+      var objectTypeArray = [" "]
+      var uniqueObjectTypesArray
       ObjectVersions.find()
                     .exec(function(err, objectversions) {
 
@@ -51,8 +51,8 @@ module.exports = {
   },
 
   uploadFile: function(req, res, next) {
-    let objectTypeArray = [" "]
-    let objectTypes
+    var objectTypeArray = [" "]
+    var objectTypes
 
     var objectVersion = new ObjectVersions(req.body)
     objectVersion.save(function (err) {
