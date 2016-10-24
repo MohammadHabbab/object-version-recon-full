@@ -44,7 +44,12 @@ After reading the suggestion from Jordan's email, I wondered if I can combine bo
 
 After incorporating the Papa Parse library, I am now able to process CSV files and query the properties of each object at particular timestamps. I am also able to process more than just one file. This is an improvement from the earlier limitation that I had faced.
 
-The app is deployed at [https://renchchua.github.io/object-version-recon-full/](https://renchchua.github.io/object-version-recon-full/).
+The MVP version of the app is deployed at [https://renchchua.github.io/object-version-recon-full/](https://renchchua.github.io/object-version-recon-full/).
+
+## Improved full-stack version
+
+After realising that there is value in letting other users (i.e. not the person who uploaded the CSV) query the various object versions, I connected the app to a backend server and hosted the whole app on Heroku. It is linked up to a mongo database using MLabs. The app is deployed at [https://fast-wave-66187.herokuapp.com/](https://fast-wave-66187.herokuapp.com/).
+
 
 ## Using the app
 
