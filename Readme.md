@@ -59,7 +59,7 @@ I have already uploaded two csv files (testdata and testdata2). There are two mo
 
 ## Using the app
 
-This repo contains two test CSV files in the public folder. At the deployed frontend, upload either one of the test CSV files. The object types of the uploaded CSV file will then appear as options that you can choose. Once you choose the object type you want to query, the options for timestamps will appear. Choose the timestamp you want to query. The object states of the object and timestamp selected will be returned.
+This repo contains four test CSV files in the public folder. As mentioned, the first two CSV files have already been uploaded. The other two are for further test uploads. At the deployed site, upload either one of the other two test CSV files. The object types of all the uploaded CSV files will then appear as options that you can choose. Once you choose the object type you want to query, the options for timestamps will appear. Choose the timestamp you want to query. The object states of the object and timestamp selected will be returned.
 
 ## Tech Stack
 
