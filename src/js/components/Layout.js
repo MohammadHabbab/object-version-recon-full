@@ -25,11 +25,11 @@ export default class Layout  extends React.Component {
           let objectTypeArray = []
           for (var i = 0; i < csvInfo.length; i++) {
             objectTypeArray.push(csvInfo[i]["object_type"])
+            axios.post('./api', csvInfo[i])
+                 .then(function (response) {
+                   this.setState({object_types:response.data})
+                 }.bind(this))
           }
-
-          let objectTypes = objectTypeArray.filter((v, i, a) => a.indexOf(v) === i)
-          objectTypes.unshift(" ")
-          this.setState({object_types:objectTypes})
           this.refs.selectedObject.value = " "
           this.refs.selectedTimestamp.value = " "
           this.setState({properties:[]})
