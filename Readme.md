@@ -50,8 +50,12 @@ The MVP version of the app is deployed at [https://renchchua.github.io/object-ve
 
 After realising that there is value in letting other users (i.e. not the person who uploaded the CSV) query the various object versions, I connected the app to a backend server and hosted the whole app on Heroku. It is linked up to a mongo database using MLabs. The app is deployed at [https://fast-wave-66187.herokuapp.com/](https://fast-wave-66187.herokuapp.com/).
 
-I have already uploaded two csv files (testdata and testdata2). There are two more csv files that haven't been uploaded (testdata3 and testdata4), which can be used to test the app. 
+I have already uploaded two csv files (testdata and testdata2). There are two more csv files that haven't been uploaded (testdata3 and testdata4), which can be used to test the app. They can be uploaded via the frontend interface (i.e. the same interface that allows the user to upload files) or with calls to the api endpoints at https://fast-wave-66187.herokuapp.com/api. The methods are as follow:
 
+  * get('https://fast-wave-66187.herokuapp.com/api') to get the array of unique object types already uploaded
+  * get('https://fast-wave-66187.herokuapp.com/api?=' + <object type (e.g. 'ObjectA')>) to get all the timestamps related to the particular object type being queried
+  * get('https://fast-wave-66187.herokuapp.com/api?=' + <object type (e.g. 'ObjectA')> + '&timestamp=' + <timestamp (i.e. the actual timestamp you want to query)>) to get the property of the object queried at the timestamp queried
+  * post('https://fast-wave-66187.herokuapp.com/api',csvInfo) where csvInfo is an array of json objects that is parsed from the uploaded csv file
 
 ## Using the app
 

@@ -16,7 +16,6 @@ export default class Layout  extends React.Component {
   componentWillMount() {
     axios.get('./api')
          .then(function (response) {
-           console.log("the response.data is ", response.data);
            this.setState({object_types:response.data})
 
          }.bind(this))
@@ -30,7 +29,6 @@ export default class Layout  extends React.Component {
         dynamicTyping: true,
         complete: function (results) {
           let csvInfo = results.data
-          this.setState({csvInfo:csvInfo})
           let objectTypeArray = []
           for (var i = 0; i < csvInfo.length; i++) {
             objectTypeArray.push(csvInfo[i]["object_type"])
@@ -51,7 +49,6 @@ export default class Layout  extends React.Component {
 
   _selectObject(e){
     let chosenObject = e.target.value
-    console.log("The selected object is ", this.refs.selectedObject.value);
     let chosenObjectForAxios = this.refs.selectedObject.value
     this.setState({chosen_object:chosenObject})
     let csvInfo = this.state.csvInfo
@@ -66,7 +63,6 @@ export default class Layout  extends React.Component {
     let csvInfo = this.state.csvInfo
     let chosenObjectForAxios = this.refs.selectedObject.value
     let timestampSelected = this.refs.selectedTimestamp.value
-    console.log("The selected object is ", this.refs.selectedTimestamp.value);
     axios.get('./api?objectType=' + chosenObjectForAxios + "&timestamp=" + timestampSelected)
          .then(function (response) {
            let resInfo = response.data[0]
