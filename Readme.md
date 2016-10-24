@@ -50,6 +50,8 @@ The MVP version of the app is deployed at [https://renchchua.github.io/object-ve
 
 After realising that there is value in letting other users (i.e. not the person who uploaded the CSV) query the various object versions, I connected the app to a backend server and hosted the whole app on Heroku. It is linked up to a mongo database using MLabs. The app is deployed at [https://fast-wave-66187.herokuapp.com/](https://fast-wave-66187.herokuapp.com/).
 
+I have already uploaded two csv files (testdata and testdata2). There are two more csv files that haven't been uploaded (testdata3 and testdata4), which can be used to test the app. 
+
 
 ## Using the app
 
