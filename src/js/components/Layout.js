@@ -13,6 +13,15 @@ export default class Layout  extends React.Component {
                   properties:[]}
   }
 
+  componentWillMount() {
+    axios.get('./api')
+         .then(function (response) {
+           console.log("the response.data is ", response.data);
+           this.setState({object_types:response.data})
+
+         }.bind(this))
+  }
+
   _uploadFile(e){
     e.preventDefault()
     $('#csvfile').parse({
@@ -43,26 +52,27 @@ export default class Layout  extends React.Component {
   _selectObject(e){
     let chosenObject = e.target.value
     console.log("The selected object is ", this.refs.selectedObject.value);
+    let chosenObjectForAxios = this.refs.selectedObject.value
     this.setState({chosen_object:chosenObject})
     let csvInfo = this.state.csvInfo
     let timestampsArray = []
-    for (var i = 0; i < csvInfo.length; i++) {
-      if (csvInfo[i]["object_type"]===chosenObject) {
-        timestampsArray.push(csvInfo[i]["timestamp"])
-      }
-    }
-    timestampsArray.unshift(" ")
-    this.setState({timestamps:timestampsArray})
+    axios.get('./api?objectType=' + chosenObjectForAxios)
+         .then(function (response) {
+           this.setState({timestamps:response.data})
+         }.bind(this))
   }
 
   _selectTimestamp(e){
     let csvInfo = this.state.csvInfo
+    let chosenObjectForAxios = this.refs.selectedObject.value
+    let timestampSelected = this.refs.selectedTimestamp.value
     console.log("The selected object is ", this.refs.selectedTimestamp.value);
-    for (var i = 0; i < csvInfo.length; i++) {
-      if (csvInfo[i]["object_type"] === this.state.chosen_object && csvInfo[i]["timestamp"]=== parseInt(e.target.value)) {
-        this.setState({properties:csvInfo[i]["object_changes"]})
-      }this.state.csvInfo[i]
-    }
+    axios.get('./api?objectType=' + chosenObjectForAxios + "&timestamp=" + timestampSelected)
+         .then(function (response) {
+           let resInfo = response.data[0]
+           this.setState({properties:resInfo["object_changes"]})
+
+         }.bind(this))
   }
 
   render() {
@@ -81,7 +91,7 @@ export default class Layout  extends React.Component {
       <div>
         <form name="uploadFile" id="uploadFile" onSubmit={this._uploadFile.bind(this)}>
           <input id="csvfile" type="file" ref="uploadedFile"/>
-          <input type="submit" value="uploadedFile"/>
+          <input type="submit" value="upload File"/>
         </form>
         <select ref="selectedObject" onChange={this._selectObject.bind(this)}>
           {object_type}

@@ -3,24 +3,49 @@ var ObjectVersions = require('mongoose').model('ObjectVersion');
 module.exports = {
 
   query: function(req, res, next) {
-    var objectType
-    var timestamp
+    console.log("the req.query is ", req.query);
+    let objectType = req.query.objectType
+    let timestamp = parseInt(req.query.timestamp)
+    let timestampArray =[" "]
+    let uniqueTimestampArray
 
-    ObjectVersions.find()
-                  .exec(function (err, objectversions) {
-                    if (err) {
-                      res.status(400).send(err);
-                    };
-                    res.status(200).json(objectversions)
-                  })
-
-
-    if (req.query.objectType) {
+    if (req.query.objectType && !req.query.timestamp) {
       objectType = req.query.objectType
-
+      ObjectVersions.find({object_type:objectType})
+                    .exec(function (err, objectversions) {
+                      if (err) {
+                        res.status(400).send(err);
+                      };
+                      for (var i = 0; i < objectversions.length; i++) {
+                        timestampArray.push(objectversions[i]["timestamp"])
+                        uniqueTimestampArray = timestampArray.filter((v, i, a) => a.indexOf(v) === i)
+                      }
+                      res.status(200).json(uniqueTimestampArray)
+                    })
 
     }else if (req.query.timestamp) {
-      timestamp = req.query.timestamp
+
+
+      ObjectVersions.find({object_type:objectType, timestamp:timestamp})
+                    .exec(function (err, objectversions) {
+                      if (err) {
+                        res.status(400).send(err);
+                      };
+                      console.log(objectversions);
+                      res.status(200).json(objectversions)
+                    })
+    }else{
+      let objectTypeArray = [" "]
+      let uniqueObjectTypesArray
+      ObjectVersions.find()
+                    .exec(function(err, objectversions) {
+
+                      for (var i = 0; i < objectversions.length; i++) {
+                        objectTypeArray.push(objectversions[i]["object_type"])
+                      }
+                        uniqueObjectTypesArray = objectTypeArray.filter((v, i, a) => a.indexOf(v) === i)
+                        res.status(200).json(uniqueObjectTypesArray)
+                    })
     }
 
   },
@@ -36,13 +61,11 @@ module.exports = {
       }
       ObjectVersions.find()
                     .exec(function(err, objectversions) {
-                      console.log("finding");
 
                       for (var i = 0; i < objectversions.length; i++) {
                         objectTypeArray.push(objectversions[i]["object_type"])
                       }
                         objectTypes = objectTypeArray.filter((v, i, a) => a.indexOf(v) === i)
-                        console.log("the log in the find execute is ", objectTypes);
                         res.status(200).json(objectTypes)
                     })
 
